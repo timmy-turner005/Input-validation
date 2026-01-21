@@ -1,100 +1,110 @@
-// "use client";
+"use client";
 
-// import { useState } from "react";
+import { useState } from "react";
 
-// export default function Login() {
-//   const [enteredEmail, setEnteredEmail] = useState("");
-//   const [enteredPassword, setEnteredPassword] = useState("");
-//   const [didEditEmail, setDidEditEmail] = useState(false);
-//   const [didEditPassword, setDidEditPassword] = useState(false);
-//   const [EmailInvalid, setEmailInvalid] = useState(false);
-//   const [PasswordInvalid, setPasswordInvalid] = useState(false);
+export default function Login() {
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [didEditEmail, setDidEditEmail] = useState(false);
+  const [didEditPassword, setDidEditPassword] = useState(false);
+  const [emailInvalid, setEmailInvalid] = useState(false);
+  const [passwordInvalid, setPasswordInvalid] = useState(false);
 
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//     console.log("submitted");
-//     // console.log("Email:" + enteredEmail);
-//     // console.log("Password:" + enteredPassword);
-//     setEnteredEmail("");
-//     setEnteredPassword("");
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("submitted");
+    console.log("Email:" + enteredEmail);
+    console.log("Password:" + enteredPassword);
 
-//     const emailIsValid = enteredEmail.includes("@");
-//     const passwordIsValid = enteredPassword.length >= 6;
+    const emailIsValid = didEditEmail && enteredEmail.includes("@");
+    const passwordIsValid = didEditPassword && enteredPassword.length >= 6;
 
-//     if (!emailIsValid) {
-//       setEmailInvalid(true);
-//       return;
-//     }
+    if (!emailIsValid) {
+      setEmailInvalid(true);
+      return;
+    }
 
-//     if (!passwordIsValid) {
-//       setPasswordInvalid(true);
-//       return;
-//     }
-//   }
+    setEmailInvalid(false);
 
-//   function handleEmailChange(e) {
-//     setEnteredEmail(e.target.value);
-//     setDidEditEmail(false);
-//   }
+    if (!passwordIsValid) {
+      setPasswordInvalid(true);
+      return;
+    }
 
-//   function handlePasswordChange(e) {
-//     setEnteredPassword(e.target.value);
-//     setDidEditPassword(false);
-//   }
+    setPasswordInvalid(false);
 
-//   function handleEmailBlur() {
-//     setDidEditEmail(true);
-//   }
+    // setEnteredEmail("");
+    // setEnteredPassword("");
+  }
 
-//   function handlePasswordBlur() {
-//     setDidEditPassword(true);
-//   }
+  function handleEmailChange(e) {
+    setEnteredEmail(e.target.value);
+    setDidEditEmail(false);
+  }
 
-//   const EmailIsInvalid = didEditEmail && !enteredEmail.includes("@");
-//   const PasswordIsInvalid = didEditPassword && enteredPassword.length < 6;
+  function handlePasswordChange(e) {
+    setEnteredPassword(e.target.value);
+    setDidEditPassword(false);
+  }
 
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <h2>Login</h2>
+  function handleEmailBlur() {
+    setDidEditEmail(true);
+  }
 
-//       <div className="control-row">
-//         <div className="control no-margin">
-//           <label htmlFor="email">Email</label>
-//           <input
-//             id="email"
-//             type="email"
-//             name="email"
-//             onBlur={handleEmailBlur}
-//             onChange={handleEmailChange}
-//             value={enteredEmail}
-//           />
-//           <div className="control-error">
-//             {EmailIsInvalid && <p>Please enter a valid email address.</p>}
-//           </div>
-//         </div>
+  function handlePasswordBlur() {
+    setDidEditPassword(true);
+  }
 
-//         <div className="control no-margin">
-//           <label htmlFor="password">Password</label>
-//           <input
-//             id="password"
-//             type="password"
-//             name="password"
-//             onBlur={handlePasswordBlur}
-//             onChange={handlePasswordChange}
-//             value={enteredPassword}
-//           />
-//           <div className="control-error">
-//             {PasswordIsInvalid && (
-//               <p>Password must be at least 6 characters long.</p>
-//             )}
-//           </div>
-//         </div>
-//       </div>
+  // const emailInvalid = didEditEmail && !enteredEmail.includes("@");
+  // const passwordInvalid = didEditPassword && enteredPassword.length < 6;
 
-//       <p className="form-actions">
-//         <button className="button button-flat">Reset</button>
-//         <button className="button">Login</button>
-//       </p>
-//     </form>
-//   );
-// }
+  const EmailIsInvalid = didEditEmail && !enteredEmail.includes("@");
+  const PasswordIsInvalid = didEditPassword && enteredPassword.length < 6;
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2>Login</h2>
+
+      <div className="control-row">
+        <div className="control no-margin">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            onBlur={handleEmailBlur}
+            onChange={handleEmailChange}
+            value={enteredEmail}
+          />
+          <div className="control-error">
+            {EmailIsInvalid && <p>Please enter a valid email address.</p>}
+          </div>
+        </div>
+
+        <div className="control no-margin">
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            onBlur={handlePasswordBlur}
+            onChange={handlePasswordChange}
+            value={enteredPassword}
+          />
+          <div className="control-error">
+            {PasswordIsInvalid && (
+              <p>Password must be at least 6 characters long.</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <p className="form-actions">
+        <button className="button button-flat" type="reset">
+          Reset
+        </button>
+        <button className="button">Login</button>
+      </p>
+    </form>
+  );
+}
