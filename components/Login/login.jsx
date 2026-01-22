@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+// import Modal from "../UI/Modal";
 
 export default function Login() {
   const [enteredEmail, setEnteredEmail] = useState("");
@@ -9,6 +10,7 @@ export default function Login() {
   const [didEditPassword, setDidEditPassword] = useState(false);
   const [emailInvalid, setEmailInvalid] = useState(false);
   const [passwordInvalid, setPasswordInvalid] = useState(false);
+  //   const [isDeleting, setIsDeleting] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -54,6 +56,14 @@ export default function Login() {
   function handlePasswordBlur() {
     setDidEditPassword(true);
   }
+
+  //   function handleStartDelete() {
+  //     setIsDeleting(true);
+  //   }
+
+  //   function handleCancelDelete() {
+  //     setIsDeleting(false);
+  //   }
 
   // const emailInvalid = didEditEmail && !enteredEmail.includes("@");
   // const passwordInvalid = didEditPassword && enteredPassword.length < 6;
@@ -104,7 +114,28 @@ export default function Login() {
           Reset
         </button>
         <button className="button">Login</button>
+        {/* <button className="button">delete</button> */}
       </p>
+      {/* {isDeleting && (
+        <Modal onClose={handleCancelDelete} >
+          <h2>Are you sure?</h2>
+          <p>
+            Do you really want to delete your account? This action cannot be
+            undone.
+          </p>
+          <div className="form-actions">
+            <button className="button button-flat" onClick={handleCancelDelete}>
+              Cancel
+            </button>
+            <button
+              className="button button-danger"
+              onClick={handleStartDelete}
+            >
+              Delete
+            </button>
+          </div>
+        </Modal>
+      )} */}
     </form>
   );
 }
